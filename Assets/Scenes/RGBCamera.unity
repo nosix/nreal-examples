@@ -749,7 +749,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1270910518780876, guid: f93abd335190b1e41836394bb8e431d0, type: 3}
       propertyPath: m_Name
-      value: NREmulatorHeadPose
+      value: NREmulatorHeadPos
       objectReference: {fileID: 0}
     - target: {fileID: 4780218207816002, guid: f93abd335190b1e41836394bb8e431d0, type: 3}
       propertyPath: m_LocalPosition.x
