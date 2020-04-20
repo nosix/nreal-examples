@@ -25,7 +25,7 @@ namespace Examples.RgbCamera
         private void SetState(State newState)
         {
             _state = newState;
-                
+
             switch (newState)
             {
                 case State.Idle:
@@ -39,7 +39,7 @@ namespace Examples.RgbCamera
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
+
         private void OnEnable()
         {
             _defaultTexture = previewer.PreviewScreen.texture;
@@ -80,7 +80,7 @@ namespace Examples.RgbCamera
 
             var isSwipeRight = deltaTouch.x > float.Epsilon;
             var isSwipeLeft = deltaTouch.x < -float.Epsilon;
-            
+
             switch (_state)
             {
                 case State.Idle:
