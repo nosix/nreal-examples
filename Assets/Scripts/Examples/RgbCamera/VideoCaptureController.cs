@@ -18,9 +18,9 @@ namespace Examples.RgbCamera
             Record
         }
 
-        public string videoDirectoryPath;
-
         [SerializeField] private NRPreviewer previewer;
+
+        public string videoDirectoryPath;
 
         private Texture _defaultTexture;
         private NRVideoCapture _videoCapture;
