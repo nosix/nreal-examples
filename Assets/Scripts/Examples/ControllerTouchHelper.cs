@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Examples
 {
-    public enum FlickDirection
+    public enum SwipeDirection
     {
         None,
         Left,
@@ -14,22 +14,22 @@ namespace Examples
 
     public class ControllerTouchHelper
     {
-        private readonly float _flickSpeedThreshold;
+        private readonly float _swipeDistanceThreshold;
 
-        public FlickDirection Flick { get; private set; }
+        public SwipeDirection Swipe { get; private set; }
 
         private float _startTime;
         private Vector2 _startPosition;
         private Vector2 _endPosition;
 
-        public ControllerTouchHelper(float flickSpeedThreshold = 0.01f)
+        public ControllerTouchHelper(float swipeDistanceThreshold = 0.1f)
         {
-            _flickSpeedThreshold = flickSpeedThreshold;
+            _swipeDistanceThreshold = swipeDistanceThreshold;
         }
 
         public void Update()
         {
-            Flick = FlickDirection.None;
+            Swipe = SwipeDirection.None;
 
             if (NRInput.IsTouching())
             {
@@ -45,14 +45,13 @@ namespace Examples
 
             if (Mathf.Abs(_startTime) < float.Epsilon) return;
 
-            var touchTime = Time.time - _startTime;
             var direction = _endPosition - _startPosition;
-            if (direction.magnitude / touchTime >= _flickSpeedThreshold)
+            if (direction.magnitude >= _swipeDistanceThreshold)
             {
                 if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-                    Flick = direction.x < 0 ? FlickDirection.Left : FlickDirection.Right;
+                    Swipe = direction.x < 0 ? SwipeDirection.Left : SwipeDirection.Right;
                 else
-                    Flick = direction.y < 0 ? FlickDirection.Down : FlickDirection.Up;
+                    Swipe = direction.y < 0 ? SwipeDirection.Down : SwipeDirection.Up;
             }
 
             _startTime = 0f;

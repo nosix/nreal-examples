@@ -60,14 +60,10 @@ namespace Examples.RgbCamera
         {
             _defaultTexture = previewer.PreviewScreen.texture;
             SetState(State.Disabled);
+            StartCoroutine(nameof(CreateVideoCapture));
         }
 
-        private void Start()
-        {
-            CreateVideoCapture();
-        }
-
-        private void CreateVideoCapture()
+        private IEnumerator CreateVideoCapture()
         {
             NRVideoCapture.CreateAsync(false, captureObject =>
             {
@@ -99,6 +95,8 @@ namespace Examples.RgbCamera
                 _videoCapture.StartVideoModeAsync(
                     cameraParameters, NRVideoCapture.AudioState.ApplicationAndMicAudio, result => SetState(State.Idle));
             });
+
+            yield break;
         }
 
         private IEnumerator Record()

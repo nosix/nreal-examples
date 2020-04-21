@@ -22,25 +22,28 @@ namespace Examples.RgbCamera
         {
             _touchHelper.Update();
 
-            targets[_activeIndex].SetActive(false);
+            if (_touchHelper.Swipe == SwipeDirection.None) return;
 
-            switch (_touchHelper.Flick)
+            switch (_touchHelper.Swipe)
             {
-                case FlickDirection.Down:
+                case SwipeDirection.Down:
+                    targets[_activeIndex].SetActive(false);
                     _activeIndex = ++_activeIndex < targets.Length ? _activeIndex : 0;
+                    targets[_activeIndex].SetActive(true);
                     break;
-                case FlickDirection.Up:
+                case SwipeDirection.Up:
+                    targets[_activeIndex].SetActive(false);
                     _activeIndex = --_activeIndex >= 0 ? _activeIndex : targets.Length - 1;
+                    targets[_activeIndex].SetActive(true);
                     break;
-                case FlickDirection.None:
-                case FlickDirection.Left:
-                case FlickDirection.Right:
+                case SwipeDirection.None:
+                case SwipeDirection.Left:
+                case SwipeDirection.Right:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            targets[_activeIndex].SetActive(true);
         }
     }
 }
